@@ -9,10 +9,13 @@ from .database import LegalDatabaseManager
 from .ai import LocalAIEngine
 from .ocr import DocumentOCREngine
 from .drafting import DocumentDrafterEngine
+from .licensing import LicenseManager, PlanTier
 
 __all__ = [
     "LegalDatabaseManager",
     "LocalAIEngine",
     "DocumentOCREngine",
     "DocumentDrafterEngine",
+    "LicenseManager",
+    "PlanTier",
 ]

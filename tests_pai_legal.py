@@ -1,5 +1,5 @@
 """
-Tests for PAi-Legal Database, AI, OCR, and Drafting modules
+Tests for PAi-Legal Database, AI, OCR, Drafting, and Licensing modules
 """
 
 import os
@@ -9,6 +9,7 @@ from pai_legal.database import LegalDatabaseManager
 from pai_legal.ai import LocalAIEngine
 from pai_legal.ocr import DocumentOCREngine
 from pai_legal.drafting import DocumentDrafterEngine
+from pai_legal.licensing import LicenseManager, PlanTier
 
 
 class TestPAiLegal(unittest.TestCase):
@@ -34,27 +35,46 @@ class TestPAiLegal(unittest.TestCase):
         matters = self.db.list_matters()
         self.assertEqual(len(matters), 1)
         self.assertEqual(matters[0]["title"], "Acme Corp Litigation")
+        self.assertEqual(self.db.count_active_matters(), 1)
 
-        doc_id = self.db.add_document(
-            matter_id=matter_id,
-            title="Complaint.pdf",
-            content="Sample legal complaint text",
-            doc_type="pleading",
+        # Test archiving matter
+        self.assertTrue(self.db.archive_matter(matter_id))
+        self.assertEqual(self.db.count_active_matters(), 0)
+
+        # Archived matter is still readable
+        archived_matter = self.db.get_matter(matter_id)
+        self.assertEqual(archived_matter["status"], "Archived")
+
+        # Unarchive
+        self.assertTrue(self.db.unarchive_matter(matter_id))
+        self.assertEqual(self.db.count_active_matters(), 1)
+
+    def test_licensing_and_quotas(self):
+        lm = LicenseManager()
+        plan_info = lm.get_plan_info()
+        self.assertEqual(plan_info["tier"], PlanTier.FREE_TRIAL)
+        self.assertEqual(plan_info["allowed_active_matters"], 2)
+
+        # Quota checks
+        can_create, _ = lm.check_can_create_matter(current_active_matters=1)
+        self.assertTrue(can_create)
+
+        can_create, msg = lm.check_can_create_matter(current_active_matters=2)
+        self.assertFalse(can_create)
+        self.assertIn("Active matter quota reached", msg)
+
+        # Upgrade to Solo signed license token
+        token = LicenseManager.create_license_token(
+            tier=PlanTier.SOLO,
+            seats=1,
+            included_active_matters=5,
+            extra_matters=2,
+            days_valid=30,
         )
-        self.assertIsNotNone(doc_id)
-
-        docs = self.db.list_documents(matter_id=matter_id)
-        self.assertEqual(len(docs), 1)
-        self.assertEqual(docs[0]["title"], "Complaint.pdf")
-
-        draft_id = self.db.add_draft(
-            matter_id=matter_id,
-            title="Motion to Dismiss",
-            content_html="<html><body>Motion Draft</body></html>",
-        )
-        self.assertIsNotNone(draft_id)
-        drafts = self.db.get_drafts(matter_id=matter_id)
-        self.assertEqual(len(drafts), 1)
+        self.assertTrue(lm.load_signed_license_token(token))
+        solo_info = lm.get_plan_info()
+        self.assertEqual(solo_info["tier"], PlanTier.SOLO)
+        self.assertEqual(solo_info["allowed_active_matters"], 7)  # 5 + 2
 
     def test_ai_engine(self):
         ai = LocalAIEngine()

@@ -1,26 +1,53 @@
 # PAi-Legal: Standalone Private Legal Workspace
 
-[![License: Commercial / Enterprise](https://img.shields.io/badge/License-Commercial-blue.svg)](#commercial-licensing)
+[![License: Commercial / Enterprise](https://img.shields.io/badge/License-Commercial-blue.svg)](#pricing--plans)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
-[![Privacy Guaranteed](https://img.shields.io/badge/Data%20Privacy-100%25%20Local%20%26%20Offline-success.svg)](#key-features)
+[![Privacy Guaranteed](https://img.shields.io/badge/Data%20Privacy-100%25%20Local%20%26%20Offline-success.svg)](#security--privacy)
 [![Build Status](https://img.shields.io/badge/Build-Passing-brightgreen.svg)](#installation--setup)
 
-**PAi-Legal** is a Next-Generation, Privacy-First Standalone Legal Intelligence & Document Drafting Workspace designed for law firms, corporate legal departments, independent attorneys, and compliance teams.
+**PAi-Legal** is a Next-Generation, Privacy-First Standalone Legal Workspace designed for individual practitioners, small law firms, and enterprise legal departments.
 
-Unlike cloud-based AI tools that compromise client confidentiality by uploading sensitive contracts to third-party servers, **PAi-Legal runs 100% locally on your workstation**. No data ever leaves your computer.
+Unlike cloud-based AI tools that compromise client confidentiality by uploading sensitive contracts to third-party servers, **PAi-Legal runs 100% locally on your hardware**. No data ever leaves your control.
+
+---
+
+## 💰 Pricing & Plans
+
+Simple, predictable pricing for legal work. **Pay for seats and active matters — nothing else is metered.**
+No per-page, per-query, or per-AI-call fees inside an active matter. All plans work online or fully offline with signed license files.
+
+| Plan | Seats | Included Active Matters | Price (Monthly) | Price (Annual - Save ~33%) | Extra Active Matter | Extra Seat |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Solo** *(Individual Practitioners)* | 1 | 5 | **$149** / mo | **$1,190** / yr | $29 / mo | N/A |
+| **Practice** *(Small Firms & Growing Practices)* | Up to 5 | 20 *(Shared Pool)* | **$449** / mo | **$3,590** / yr | $24 / mo | $79 / mo |
+| **Firm** *(Established Firms)* | Up to 15 | 75 *(Shared Pool)* | **$1,299** / mo | **$10,390** / yr | $19 / mo | $69 / mo |
+| **Enterprise** *(Custom Deployment)* | Custom | Custom Volume | **Contact Us** | **Contact Us** | Custom | Custom |
+
+### 🎁 14-Day Free Trial
+- Start with **1 seat and 2 active matters for 14 days**.
+- **Credit card required to begin free trial.**
+- Everything you create stays yours if you continue or leave.
+
+---
+
+## ⚙️ How Billing Works
+
+- **Seat**: A named user who can open and work in the product.
+- **Active Matter**: A live case or matter. It counts when you create it or run the first analysis. Archive a matter when completed, and it stops counting against your quota while remaining **fully readable** forever.
+- **Offline Signed Licenses**: Offline deployments use a signed cryptographic capacity file (`seats + matter allowance + expiry`). Refresh when you choose to go online.
 
 ---
 
 ## 🌟 Key Features
 
 - 🔒 **Zero Data Leakage (100% Offline)**
-  All AI analysis, OCR, document indexation, and drafting are computed locally on your device hardware. Compliant with HIPAA, GDPR, SOC 2, and attorney-client privilege mandates.
+  All AI analysis, OCR, document indexation, and drafting are computed locally on your device hardware. Compliant with attorney-client privilege, HIPAA, GDPR, and SOC 2.
 - 🧠 **Embedded Local AI Engine (Llama.cpp / GGUF)**
   High-performance offline Large Language Model support tailored for contract review, clause extraction, legal risk assessment, and summary generation.
 - 📄 **Multiformat OCR & Ingestion Engine**
   Extract text seamlessly from scanned PDFs, images, RTF, Word docs, PowerPoint presentations, Excel sheets, and Outlook `.msg` emails using integrated Tesseract and PyMuPDF engines.
 - ⚖️ **Interactive Legal Document Drafter**
-  Draft court motions, pleadings, briefs, and client agreements with auto-formatting for jurisdiction rules (Federal, State, and custom local court guidelines).
+  Draft court motions, pleadings, briefs, and client agreements with auto-formatting for jurisdiction rules.
 - 🗄️ **Encrypted Matter & Case Database**
   Organize client files, evidence, court filings, and research notes in a secure, locally encrypted SQLite database store.
 
@@ -60,52 +87,16 @@ The compiled executable will be available under `dist/PAiLegal/`.
 
 ---
 
-## 📐 Architecture & Repository Structure
+## 🛡️ Security & FAQ
 
-```text
-PAi-Legal/
-├── pai_legal/                  # Core Application Package
-│   ├── __init__.py             # Package exports
-│   ├── app.py                  # Main CLI/GUI runner & entrypoint
-│   ├── database.py             # SQLite matter & document database manager
-│   ├── ai.py                   # Local LLM wrapper & legal intelligence
-│   ├── ocr.py                  # PyMuPDF & Tesseract OCR pipeline
-│   ├── drafting.py             # Motion & contract drafting engine
-│   └── resources/              # Static resources & jurisdiction specs
-│       ├── drafter.html        # Interactive Drafter UI asset
-│       └── jurisdictions/      # Jurisdiction rule configuration JSONs
-├── run_pai_legal.py            # Executable launcher script
-├── PAiLegal.spec               # PyInstaller cross-platform spec
-├── pyproject.toml              # Build & dependency metadata
-└── requirements.txt            # Python dependencies
-```
-
----
-
-## 💼 Commercial Licensing & Sales
-
-PAi-Legal is available under flexible commercial deployment models for solo practitioners, enterprise law firms, and corporate legal divisions:
-
-| Feature Tier | Professional | Enterprise / Firm | Custom / On-Premise |
-| :--- | :---: | :---: | :---: |
-| **Local AI Legal Engine** | Full | Full | Custom Fine-tuned Models |
-| **Document Ingestion & OCR** | Standard | High-Throughput | Unlimited |
-| **Jurisdiction Rules** | US Federal / State | Unlimited | Custom Court Rules |
-| **Support & Updates** | Standard Email | Dedicated 24/7 | SLA + On-Site Training |
-| **Deployment** | Single Seat | Multi-User Firm | Enterprise Fleet |
-
-For licensing, sales inquiries, or custom deployment options, please contact sales:
-📧 **Email**: sales@yprivateai.com / contact@pailegal.com
-🌐 **Website**: [https://yprivateai.com](https://yprivateai.com)
-
----
-
-## 🛡️ Privacy & Security Compliance
-
-PAi-Legal ensures absolute data sovereignty:
-- **No Remote Telemetry**: Zero network requests or tracking calls.
-- **Client Confidentiality Guaranteed**: Fully retains attorney work-product privilege.
-- **Encrypted Local Storage**: Local database encrypted with AES-256 standard encryption primitives.
+- **Can I switch between online and offline?**
+  Yes. Same account, same matters. Offline uses a signed license you refresh when convenient.
+- **What happens if I go over my active matters?**
+  You can add individual matters ($19–$29/mo) or move to the next plan. Existing work is never locked or deleted.
+- **Do you train on my data?**
+  No. Zero data collection or remote AI telemetry.
+- **Is there a long-term contract?**
+  Monthly plans are month-to-month. Annual plans are prepaid for the year.
 
 ---
 

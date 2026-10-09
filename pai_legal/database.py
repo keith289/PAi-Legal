@@ -83,17 +83,42 @@ class LegalDatabaseManager:
         with self.get_connection() as conn:
             cursor = conn.cursor()
             cursor.execute(
-                "INSERT INTO matters (title, case_number, client_name, jurisdiction) VALUES (?, ?, ?, ?)",
+                "INSERT INTO matters (title, case_number, client_name, jurisdiction, status) VALUES (?, ?, ?, ?, 'Active')",
                 (title, case_number, client_name, jurisdiction),
             )
             conn.commit()
             return cursor.lastrowid
 
-    def list_matters(self) -> List[Dict[str, Any]]:
+    def list_matters(self, status_filter: Optional[str] = None) -> List[Dict[str, Any]]:
         with self.get_connection() as conn:
             cursor = conn.cursor()
-            cursor.execute("SELECT * FROM matters ORDER BY updated_at DESC")
+            if status_filter:
+                cursor.execute("SELECT * FROM matters WHERE status = ? ORDER BY updated_at DESC", (status_filter,))
+            else:
+                cursor.execute("SELECT * FROM matters ORDER BY updated_at DESC")
             return [dict(row) for row in cursor.fetchall()]
+
+    def count_active_matters(self) -> int:
+        with self.get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT COUNT(*) FROM matters WHERE status = 'Active'")
+            return cursor.fetchone()[0]
+
+    def archive_matter(self, matter_id: int) -> bool:
+        """Archive matter so it stops counting against active matter quota while remaining fully readable."""
+        with self.get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute("UPDATE matters SET status = 'Archived', updated_at = CURRENT_TIMESTAMP WHERE id = ?", (matter_id,))
+            conn.commit()
+            return cursor.rowcount > 0
+
+    def unarchive_matter(self, matter_id: int) -> bool:
+        """Unarchive matter back to Active status."""
+        with self.get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute("UPDATE matters SET status = 'Active', updated_at = CURRENT_TIMESTAMP WHERE id = ?", (matter_id,))
+            conn.commit()
+            return cursor.rowcount > 0
 
     def get_matter(self, matter_id: int) -> Optional[Dict[str, Any]]:
         with self.get_connection() as conn:
