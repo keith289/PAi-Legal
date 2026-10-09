@@ -1,0 +1,14 @@
+﻿{
+    "schema":  "pai-legal-production-baseline-receipt",
+    "source_path":  "C:\\Users\\libby\\Downloads\\files (23)\\PAi-Legal-v0_9_5-source\\PAi-Legal",
+    "verified_package_version":  "0.9.6.0",
+    "captured_at_utc":  "2026-08-31T04:36:03.5658671Z",
+    "files":  {
+                  "build_windows.ps1":  "e79bab7b59ea3610f08ef256d4baca2f0c2c2aa3d4dbdce8284ad1cb14dc08d2",
+                  "pyproject.toml":  "ad5db3e2a60b4ad65017b727bf2eb4613f59700da18054310c4765c9714a1ddb",
+                  "pai_legal\\app.py":  "c423c595fa31a3544ce2e7c57bc8304658139695c96fa1f286a1672217ca9ab4",
+                  "pai_legal\\workspace.py":  "28ea3528c5659829fd3877a54df7df1ad0ba2b5390cb0faf5d10a7ba9f7089b0",
+                  "pai_legal\\parliament.py":  "30964fae1dde4f1012b482cd8e52a112d22c7b88359d3dc0b7436e6c74814b48",
+                  "pai_legal\\brackets.py":  "792e4df6c38a28494e20f0e4604753de3f54d444329a4e0fac9d9383af489b5a"
+              }
+}
