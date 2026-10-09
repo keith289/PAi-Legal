@@ -1,0 +1,16 @@
+Metadata-Version: 2.4
+Name: pai-legal
+Version: 1.0.0
+Summary: Standalone private legal workspace with local AI, OCR, and optional PSi Legal research
+Requires-Python: >=3.10
+Requires-Dist: PyMuPDF>=1.26
+Requires-Dist: Pillow>=11
+Requires-Dist: openpyxl>=3.1
+Requires-Dist: python-pptx>=1.0
+Requires-Dist: striprtf>=0.0.29
+Requires-Dist: extract-msg>=0.54
+Requires-Dist: tkinterdnd2>=0.4.3
+Requires-Dist: reportlab>=4.2
+Requires-Dist: cryptography<51,>=44
+Provides-Extra: build
+Requires-Dist: pyinstaller>=6; extra == "build"

@@ -1,0 +1,2 @@
+[console_scripts]
+pai-legal = pai_legal.app:main
