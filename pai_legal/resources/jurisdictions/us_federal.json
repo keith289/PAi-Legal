@@ -1,0 +1,15 @@
+{
+  "jurisdiction_code": "US-FED",
+  "jurisdiction_name": "United States Federal Courts",
+  "caption_format": "standard_federal",
+  "margin_inches": 1.0,
+  "line_spacing": 2.0,
+  "font_family": "Times New Roman",
+  "font_size_pt": 12,
+  "default_motion_types": [
+    "Motion to Dismiss",
+    "Motion for Summary Judgment",
+    "Motion in Limine",
+    "Motion for Extension of Time"
+  ]
+}
