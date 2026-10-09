@@ -14,7 +14,6 @@ from pathlib import Path
 from typing import Dict, Iterable, List, Optional
 
 from .ingestion import TextExtractor
-from .validation import document_record, start_background
 from .audit import AuditChain
 from .backup import create_backup, restore_backup
 from .epistemic import BracketType, bracket_name, wrap_claim
@@ -506,7 +505,6 @@ class Workspace:
     def ingest(self, case: CaseRef, paths: Iterable[Path]) -> List[IngestedFile]:
         self._authorize("evidence.write", write=True)
         results: List[IngestedFile] = []
-        quality_records: List[dict] = []
         count = 0
         for source in (Path(item) for item in paths):
             if not source.is_file():
@@ -519,8 +517,7 @@ class Workspace:
                 shutil.copy2(source, original)
                 count += 1
                 try:
-                    normalized, method, extraction = self.normalize(case, destination)
-                    quality_records.append(document_record(destination.name, extraction))
+                    normalized, method = self.normalize(case, destination)
                     warning = ""
                     # The filename picked the folder before any text existed.
                     # Let the document's own first page correct it.
@@ -538,16 +535,6 @@ class Workspace:
                 ))
             except Exception as exc:
                 results.append(IngestedFile(original, destination, None, document_type, folder, "", str(exc)))
-        if quality_records:
-            # Background quality control: compares each extracted page against
-            # the page it came from and flags what disagrees. Fire and forget —
-            # it never blocks an ingest, never raises here, and runs the
-            # deterministic checks alone when no checker model is installed.
-            try:
-                start_background(case.path, quality_records)
-            except Exception:
-                pass
-
         if count:
             data = self._read(case.path)
             data["document_count"] = int(data.get("document_count", 0)) + count
@@ -580,17 +567,8 @@ class Workspace:
                 return candidate
             number += 1
 
-    def normalize(self, case: CaseRef, source: Path):
-        """Extract one document. Returns (text path, method, extraction result).
-
-        The extractor is pointed at this case before every extraction, so any
-        page it has to rasterize is retained inside the case rather than in a
-        temporary directory. Nothing reads those renders here; the background
-        quality check does, after the ingest finishes.
-        """
+    def normalize(self, case: CaseRef, source: Path) -> tuple[Path, str]:
         target = self._unique(case.path / "02_text" / f"{source.stem}.txt")
-        self.extractor.render_dir = case.path / "trace" / "pages"
-        self.extractor.render = "ocr"
         result = self.extractor.extract(source)
         header = (
             f"<<<SOURCE {source.name}>>>\n"
@@ -602,7 +580,7 @@ class Workspace:
         index_path.write_text(json.dumps(
             state_record(state, lock, source=source.name), indent=2, ensure_ascii=False
         ), encoding="utf-8")
-        return target, result.method, result
+        return target, result.method
 
 
     def build_reasoning_corpus(self, *args, **kwargs):
