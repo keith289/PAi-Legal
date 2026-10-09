@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pai-legal"
+version = "1.0.0"
+description = "Standalone private legal workspace with local AI, OCR, and optional PSi Legal research"
+requires-python = ">=3.10"
+dependencies = [
+    "PyMuPDF>=1.26",
+    "Pillow>=11",
+    "openpyxl>=3.1",
+    "python-pptx>=1.0",
+    "striprtf>=0.0.29",
+    "extract-msg>=0.54",
+    "tkinterdnd2>=0.4.3",
+    "reportlab>=4.2",
+    "cryptography>=44,<51",
+]
+
+[project.optional-dependencies]
+build = ["pyinstaller>=6"]
+
+[project.scripts]
+pai-legal = "pai_legal.app:main"
+
+[tool.setuptools]
+packages = ["pai_legal"]
+
+[tool.setuptools.package-data]
+pai_legal = ["resources/*.html", "resources/jurisdictions/*.json"]
