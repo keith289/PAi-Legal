@@ -106,17 +106,17 @@ class CompanionRequestHandler(BaseHTTPRequestHandler):
         # GET /api/cases/<case_id>/files/<filename>
         if len(parts) == 5 and parts[:2] == ["api", "cases"] and parts[3] == "files":
             case_id = parts[2]
-            filename = parts[4]
+            filename = Path(parts[4]).name
             case = self._find_case(case_id)
             if not case:
                 self._send_json(404, {"error": f"Case {case_id} not found"})
                 return
 
             # Search in 02_text or 01_originals
-            target = case.path / "02_text" / filename
-            if not target.is_file():
-                target = case.path / "01_originals" / filename
-            if not target.is_file():
+            target = (case.path / "02_text" / filename).resolve()
+            if not target.is_file() or not target.is_relative_to(case.path.resolve()):
+                target = (case.path / "01_originals" / filename).resolve()
+            if not target.is_file() or not target.is_relative_to(case.path.resolve()):
                 self._send_json(404, {"error": f"File {filename} not found in case {case_id}"})
                 return
 
@@ -152,7 +152,8 @@ class CompanionRequestHandler(BaseHTTPRequestHandler):
                 self._send_json(400, {"error": "Invalid JSON payload"})
                 return
 
-            filename = str(data.get("filename") or "").strip()
+            raw_filename = str(data.get("filename") or "").strip()
+            filename = Path(raw_filename).name if raw_filename else ""
             text_content = str(data.get("text") or "").strip()
             note = str(data.get("note") or "").strip()
 
@@ -166,7 +167,10 @@ class CompanionRequestHandler(BaseHTTPRequestHandler):
                 return
 
             # Save uploaded document text/file
-            inbox = case.path / "00_inbox" / filename
+            inbox = (case.path / "00_inbox" / filename).resolve()
+            if not inbox.is_relative_to(case.path.resolve()):
+                self._send_json(400, {"error": "Invalid destination filename"})
+                return
             inbox.parent.mkdir(parents=True, exist_ok=True)
             inbox.write_text(text_content, encoding="utf-8")
 

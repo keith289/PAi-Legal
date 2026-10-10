@@ -1,0 +1,199 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1A0000012B00000000000001 /* PAiLegalCompanionApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0000022B00000000000001 /* PAiLegalCompanionApp.swift */; };
+		1A0000032B00000000000001 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0000042B00000000000001 /* MainView.swift */; };
+		1A0000052B00000000000001 /* CaseDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0000062B00000000000001 /* CaseDetailView.swift */; };
+		1A0000072B00000000000001 /* AddEvidenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0000082B00000000000001 /* AddEvidenceView.swift */; };
+		1A0000092B00000000000001 /* CompanionAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A00000A2B00000000000001 /* CompanionAPIClient.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1A0000022B00000000000001 /* PAiLegalCompanionApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PAiLegalCompanionApp.swift; sourceTree = "<group>"; };
+		1A0000042B00000000000001 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		1A0000062B00000000000001 /* CaseDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseDetailView.swift; sourceTree = "<group>"; };
+		1A0000082B00000000000001 /* AddEvidenceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEvidenceView.swift; sourceTree = "<group>"; };
+		1A00000A2B00000000000001 /* CompanionAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanionAPIClient.swift; sourceTree = "<group>"; };
+		1A00000B2B00000000000001 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1A00000C2B00000000000001 /* PAiLegalCompanion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PAiLegalCompanion.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1A00000D2B00000000000001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1A00000E2B00000000000001 = {
+			isa = PBXGroup;
+			children = (
+				1A00000F2B00000000000001 /* PAiLegalCompanion */,
+				1A0000102B00000000000001 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1A00000F2B00000000000001 /* PAiLegalCompanion */ = {
+			isa = PBXGroup;
+			children = (
+				1A0000022B00000000000001 /* PAiLegalCompanionApp.swift */,
+				1A0000042B00000000000001 /* MainView.swift */,
+				1A0000062B00000000000001 /* CaseDetailView.swift */,
+				1A0000082B00000000000001 /* AddEvidenceView.swift */,
+				1A00000A2B00000000000001 /* CompanionAPIClient.swift */,
+				1A00000B2B00000000000001 /* Info.plist */,
+			);
+			path = PAiLegalCompanion;
+			sourceTree = "<group>";
+		};
+		1A0000102B00000000000001 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1A00000C2B00000000000001 /* PAiLegalCompanion.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1A0000112B00000000000001 /* PAiLegalCompanion */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1A0000122B00000000000001 /* Build configuration list for PBXNativeTarget "PAiLegalCompanion" */;
+			buildPhases = (
+				1A0000132B00000000000001 /* Sources */,
+				1A00000D2B00000000000001 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PAiLegalCompanion;
+			productName = PAiLegalCompanion;
+			productReference = 1A00000C2B00000000000001 /* PAiLegalCompanion.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1A0000142B00000000000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+
+			};
+			buildConfigurationList = 1A0000152B00000000000001 /* Build configuration list for PBXProject "PAiLegalCompanion" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 1A00000E2B00000000000001;
+			productRefGroup = 1A0000102B00000000000001 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1A0000112B00000000000001 /* PAiLegalCompanion */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1A0000132B00000000000001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1A0000012B00000000000001 /* PAiLegalCompanionApp.swift in Sources */,
+				1A0000032B00000000000001 /* MainView.swift in Sources */,
+				1A0000052B00000000000001 /* CaseDetailView.swift in Sources */,
+				1A0000072B00000000000001 /* AddEvidenceView.swift in Sources */,
+				1A0000092B00000000000001 /* CompanionAPIClient.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1A0000162B00000000000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				INFOPLIST_FILE = PAiLegalCompanion/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.pailegal.companion;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		1A0000172B00000000000001 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				INFOPLIST_FILE = PAiLegalCompanion/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.pailegal.companion;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		1A0000182B00000000000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		1A0000192B00000000000001 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1A0000122B00000000000001 /* Build configuration list for PBXNativeTarget "PAiLegalCompanion" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1A0000162B00000000000001 /* Debug */,
+				1A0000172B00000000000001 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1A0000152B00000000000001 /* Build configuration list for PBXProject "PAiLegalCompanion" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1A0000182B00000000000001 /* Debug */,
+				1A0000192B00000000000001 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1A0000142B00000000000001 /* Project object */;
+}
