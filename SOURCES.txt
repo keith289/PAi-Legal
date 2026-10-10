@@ -1,5 +1,7 @@
+Assets/Square150x150Logo.png
+Assets/Square44x44Logo.png
+Assets/StoreLogo.png
 README.md
-pyproject.toml
 pai_legal/__init__.py
 pai_legal/app.py
 pai_legal/audit.py
@@ -26,6 +28,8 @@ pai_legal/netsecurity.py
 pai_legal/parliament.py
 pai_legal/plainspeak.py
 pai_legal/procutil.py
+pai_legal/resources/jurisdictions/GA-SUPERIOR-CIVIL.json
+pai_legal/resources/jurisdictions/US-FEDERAL-CIVIL.json
 pai_legal/rpm_legal.py
 pai_legal/security.py
 pai_legal/setup_ui.py
@@ -33,15 +37,9 @@ pai_legal/transition_map.py
 pai_legal/validation.py
 pai_legal/vision.py
 pai_legal/workspace.py
-pai_legal.egg-info/PKG-INFO
-pai_legal.egg-info/SOURCES.txt
-pai_legal.egg-info/dependency_links.txt
-pai_legal.egg-info/entry_points.txt
-pai_legal.egg-info/requires.txt
-pai_legal.egg-info/top_level.txt
-pai_legal/resources/drafter.html
-pai_legal/resources/jurisdictions/GA-SUPERIOR-CIVIL.json
-pai_legal/resources/jurisdictions/US-FEDERAL-CIVIL.json
+pyproject.toml
+store-bridge/Build-StoreBridge.ps1
+store-bridge/Program.cs
 tests/test_claims_handoff_097.py
 tests/test_commerce_097.py
 tests/test_core.py

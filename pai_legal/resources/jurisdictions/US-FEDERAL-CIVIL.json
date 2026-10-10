@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "id": "US-FEDERAL-CIVIL",
+  "label": "United States federal civil filing",
+  "verified_as_of": "2026-08-23",
+  "source_url": "https://www.uscourts.gov/forms-rules/current-rules-practice-procedure",
+  "official_forms": [
+    {
+      "title": "United States Courts civil forms",
+      "url": "https://www.uscourts.gov/forms-rules/forms/civil-forms",
+      "note": "Examples and national forms; verify the selected district's local forms and rules."
+    }
+  ],
+  "rules": [
+    {
+      "type": "required_pattern",
+      "code": "FRCP-10-COURT",
+      "severity": "error",
+      "pattern": "United\\s+States\\s+District\\s+Court",
+      "message": "Add the name of the federal district court to the caption.",
+      "authority": "Fed. R. Civ. P. 10(a)"
+    },
+    {
+      "type": "required_pattern",
+      "code": "FRCP-10-TITLE",
+      "severity": "error",
+      "pattern": "\\b(v\\.?|versus)\\b",
+      "message": "Add a caption identifying the parties.",
+      "authority": "Fed. R. Civ. P. 10(a)"
+    },
+    {
+      "type": "required_pattern",
+      "code": "FRCP-10-FILE-NUMBER",
+      "severity": "warning",
+      "pattern": "(Civil\\s+Action|Case)\\s+(No\\.?|Number|#|\\[NEEDED:)",
+      "message": "Add the file number, or an explicit [NEEDED] marker for a new action.",
+      "authority": "Fed. R. Civ. P. 10(a)"
+    },
+    {
+      "type": "required_pattern",
+      "code": "FRCP-11-SIGNATURE",
+      "severity": "error",
+      "pattern": "(\\/s\\/|signature|respectfully\\s+submitted)",
+      "message": "Add the filer’s signature block and contact information.",
+      "authority": "Fed. R. Civ. P. 11(a)"
+    },
+    {
+      "type": "forbidden_pattern",
+      "code": "FRCP-5.2-SSN",
+      "severity": "error",
+      "pattern": "(?<!\\d)\\d{3}-\\d{2}-\\d{4}(?!\\d)",
+      "message": "A full Social Security or taxpayer-identification number appears unredacted.",
+      "authority": "Fed. R. Civ. P. 5.2(a)"
+    },
+    {
+      "type": "forbidden_pattern",
+      "code": "FRCP-5.2-BIRTH-DATE",
+      "severity": "error",
+      "pattern": "(?:date\\s+of\\s+birth|dob)\\s*[:=-]?\\s*(?:0?[1-9]|1[0-2])[\\/-](?:0?[1-9]|[12]\\d|3[01])[\\/-](?:19|20)\\d{2}",
+      "message": "A complete date of birth appears unredacted; ordinarily only the year may be included.",
+      "authority": "Fed. R. Civ. P. 5.2(a)"
+    },
+    {
+      "type": "forbidden_pattern",
+      "code": "FRCP-5.2-ACCOUNT",
+      "severity": "warning",
+      "pattern": "(?:account|acct)\\s*(?:no\\.?|number|#)?\\s*[:=-]?\\s*\\d{5,}",
+      "message": "A financial-account number may contain more than the permitted last four digits.",
+      "authority": "Fed. R. Civ. P. 5.2(a)"
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "id": "GA-SUPERIOR-CIVIL",
+  "label": "Georgia Superior Court civil filing",
+  "verified_as_of": "2026-08-23",
+  "source_url": "https://georgiacourts.gov/georgia-supreme-court-rules/",
+  "official_forms": [
+    {
+      "title": "General Civil Case Filing and Disposition Information Forms",
+      "url": "https://www.gasupreme.us/wp-content/uploads/2019/08/Civil_Domestic_Filing_Disposition_Form-FINAL-eff-010120.pdf",
+      "note": "Statewide filing/disposition information form; verify current county-specific forms and standing orders."
+    },
+    {
+      "title": "Georgia Superior Court standard forms",
+      "url": "https://www.gasupreme.us/superior-court-standard-forms/",
+      "note": "Includes current summons and service forms."
+    }
+  ],
+  "rules": [
+    {
+      "type": "required_pattern",
+      "code": "GA-CAPTION-COURT",
+      "severity": "error",
+      "pattern": "In\\s+the\\s+Superior\\s+Court\\s+of.+County[,]?\\s+Georgia",
+      "message": "Add the Georgia Superior Court and county to the caption.",
+      "authority": "Uniform Superior Court Rules; official form caption"
+    },
+    {
+      "type": "required_pattern",
+      "code": "GA-CAPTION-PARTIES",
+      "severity": "error",
+      "pattern": "\\b(v\\.?|versus)\\b",
+      "message": "Add a caption identifying the plaintiff and defendant.",
+      "authority": "Uniform Superior Court Rules; official form caption"
+    },
+    {
+      "type": "required_pattern",
+      "code": "GA-CIVIL-ACTION-NUMBER",
+      "severity": "warning",
+      "pattern": "Civil\\s+Action\\s+(No\\.?|Number|#|\\[NEEDED:)",
+      "message": "Add the civil-action number, or an explicit [NEEDED] marker for a new action.",
+      "authority": "Georgia Courts official civil form caption"
+    },
+    {
+      "type": "required_pattern",
+      "code": "GA-SIGNATURE",
+      "severity": "error",
+      "pattern": "(\\/s\\/|signature|respectfully\\s+submitted)",
+      "message": "Add the filer’s signature block and current contact information.",
+      "authority": "Uniform Superior Court Rules"
+    },
+    {
+      "type": "metadata_required",
+      "code": "GA-COUNTY-LOCAL-RULES",
+      "severity": "warning",
+      "field": "county",
+      "message": "Select the county so its local rules, standing orders, and e-filing provider can be checked.",
+      "authority": "Georgia Courts e-file court records directory"
+    },
+    {
+      "type": "metadata_required",
+      "code": "GA-CASE-FILING-FORM",
+      "severity": "warning",
+      "field": "case_filing_information_form_confirmed",
+      "applies_to": ["complaint", "petition"],
+      "message": "Confirm the current General Civil Case Filing Information Form accompanies the initiating filing.",
+      "authority": "O.C.G.A. § 9-11-3(b); Georgia Courts filing forms"
+    }
+  ]
+}
