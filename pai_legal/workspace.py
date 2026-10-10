@@ -283,6 +283,23 @@ class Workspace:
         temporary.replace(path)
 
 
+    # Companion Server Integration --------------------
+    def start_companion_server(self, host: str = "0.0.0.0", port: int = 8088):
+        from .companion_server import CompanionServer
+        if not hasattr(self, "_companion_server") or self._companion_server is None:
+            self._companion_server = CompanionServer(self, host=host, port=port)
+        return self._companion_server.start()
+
+    def stop_companion_server(self):
+        if hasattr(self, "_companion_server") and self._companion_server:
+            self._companion_server.stop()
+            self._companion_server = None
+
+    def companion_server_status(self):
+        if hasattr(self, "_companion_server") and self._companion_server:
+            return self._companion_server.status()
+        return {"running": False, "host": "", "port": 0, "pairing_token": "", "url": ""}
+
     # PAi Legal 0.9.7 commerce / Parliament seam --------------------
     def _commerce_gate(self):
         return CommerceManager(self.root)

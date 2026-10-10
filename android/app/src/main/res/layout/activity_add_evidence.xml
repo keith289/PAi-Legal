@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Upload Evidence to Case"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="#18A7FF"
+        android:layout_marginBottom="16dp" />
+
+    <EditText
+        android:id="@+id/etFilename"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Filename (e.g. photo_notes.txt)"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/etContent"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:hint="Document text, observation or quick note"
+        android:gravity="top|start"
+        android:inputType="textMultiLine"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp" />
+
+    <Button
+        android:id="@+id/btnUpload"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Upload Evidence to PAi Legal Workspace"
+        android:backgroundTint="#18A7FF" />
+
+</LinearLayout>

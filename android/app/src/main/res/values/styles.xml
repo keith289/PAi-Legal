@@ -1,0 +1,7 @@
+<resources>
+    <style name="Theme.PAiLegalCompanion" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">#18A7FF</item>
+        <item name="colorPrimaryVariant">#0088DD</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+    </style>
+</resources>
