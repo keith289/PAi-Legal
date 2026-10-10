@@ -195,14 +195,53 @@ class DPAPIProtector:
             ctypes.windll.kernel32.LocalFree(output.pbData)
 
 
+class SoftProtector:
+    """Fallback software protector when DPAPI is unavailable (e.g., Linux/macOS or tests)."""
+
+    def __init__(self, root: Path | None = None):
+        self.description = "PAi Legal Software Vault (PBKDF2/AES-GCM)"
+        self.key_path = (Path(root) / "config" / ".vault.key") if root else None
+
+    def _get_key(self) -> bytes:
+        if not self.key_path:
+            return b"PAiLegalFallbackTestKey32BytesLong!"[:32]
+        self.key_path.parent.mkdir(parents=True, exist_ok=True)
+        if self.key_path.is_file():
+            return base64.b64decode(self.key_path.read_text(encoding="utf-8").strip())
+        key = os.urandom(32)
+        self.key_path.write_text(base64.b64encode(key).decode("ascii"), encoding="utf-8")
+        return key
+
+    def protect(self, value: bytes) -> bytes:
+        from cryptography.hazmat.primitives.ciphers.aead import AESGCM
+        key = self._get_key()
+        aesgcm = AESGCM(key)
+        nonce = os.urandom(12)
+        ciphertext = aesgcm.encrypt(nonce, value, b"PAi Legal credential vault v1")
+        return nonce + ciphertext
+
+    def unprotect(self, value: bytes) -> bytes:
+        from cryptography.hazmat.primitives.ciphers.aead import AESGCM
+        key = self._get_key()
+        aesgcm = AESGCM(key)
+        nonce = value[:12]
+        ciphertext = value[12:]
+        return aesgcm.decrypt(nonce, ciphertext, b"PAi Legal credential vault v1")
+
+
 class SecretStore:
-    """Small DPAPI-backed credential vault; plaintext is never written to disk."""
+    """Small DPAPI-backed (or SoftProtector fallback) credential vault; plaintext is never written to disk."""
 
     def __init__(self, root: Path, protector=None, filename: str = "secrets.json"):
         if Path(filename).name != filename or not filename.endswith(".json"):
             raise ValueError("Secret-store filenames must be simple JSON filenames")
         self.path = Path(root) / "config" / filename
-        self.protector = protector or DPAPIProtector()
+        if protector:
+            self.protector = protector
+        elif os.name == "nt":
+            self.protector = DPAPIProtector()
+        else:
+            self.protector = SoftProtector(root)
 
     def _data(self) -> dict:
         if not self.path.is_file():

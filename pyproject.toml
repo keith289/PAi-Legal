@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pai-legal"
-version = "1.0.0"
+version = "0.9.7"
 description = "Standalone private legal workspace with local AI, OCR, and optional PSi Legal research"
 requires-python = ">=3.10"
 dependencies = [

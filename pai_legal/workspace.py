@@ -23,7 +23,7 @@ from .governance import (conflict_hits, disposition_status, parties_from_caption
 from .jurisdiction import validate_filing
 from .rpm_legal import process as rpm_process, state_record
 from .security import (AccessController, DPAPIProtector, SecretStore,
-                       SecretStoreUnavailable, StoragePolicy)
+                       SecretStoreUnavailable, SoftProtector, StoragePolicy)
 from .transition_map import (
     CaseTransitionMap,
     build_case_transition_map,
@@ -110,9 +110,11 @@ class Workspace:
         self.access = access or AccessController(self.root)
         self.storage_policy = storage_policy or StoragePolicy(self.root)
         self.secret_store = secret_store or SecretStore(self.root)
-        self.audit_secret_store = (audit_secret_store or secret_store or
-                                   SecretStore(self.root, protector=DPAPIProtector(machine_scope=True),
-                                               filename="machine_secrets.json"))
+        if audit_secret_store:
+            self.audit_secret_store = audit_secret_store
+        else:
+            protector = DPAPIProtector(machine_scope=True) if os.name == "nt" else SoftProtector(self.root)
+            self.audit_secret_store = SecretStore(self.root, protector=protector, filename="audit_vault.json")
         self._audit_chains: dict[str, AuditChain] = {}
         self._audit_key_cache: dict[str, bytes] = {}
         self._workspace_chain: AuditChain | None = None
@@ -335,6 +337,7 @@ class Workspace:
         return sorted(cases, key=lambda case: case.case_id)
 
     def create_case(self, *args, **kwargs):
+        self._authorize("case.create", write=True)
         reservation = self._commerce_gate().begin_new_case(self._commerce_case_count())
         case = None
         try:
